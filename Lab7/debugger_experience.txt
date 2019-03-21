@@ -1,0 +1,4 @@
+Tunc:
+I mainly used the debugger in HW6 instead of this assignment, because the main problem I encountered here was infinite loops. 
+From that experience I can say that it was very helpful to see what is happening and print different variables to check their condition,
+especially when I realized that I should use 'next' sometimes instead of 'step'.
