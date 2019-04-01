@@ -2,10 +2,6 @@
  * HForest: a class to represent a collection of HTrees.
  */
 
-/*
- * Forest is a vector that stores pairs of key to a tree and its pointer.
- */
-
 #include "hforest.hh"
 #include <algorithm>
 #include <cassert>
