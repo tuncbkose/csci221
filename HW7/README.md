@@ -22,6 +22,6 @@ The vector inside HForest contains HTrees as pairs of values and pointers, using
 
 In using heap functions std::push_heap and std::pop_heap, I encountered a problem where trying to give a comparison of values as a third argument using HForest private method cmp gives a compilation error:
 >/usr/include/c++/8/bits/predefined_ops.h:177:11: error: expression cannot be used as a function
->  { return bool(_M_comp(*__it, __val)); }
+> { return bool(_M_comp(*__it, __val)); }
 
 So far, I was unable to figure out why, and how to solve it, so the use of these heap functions in add_tree and pop_tree methods currently don't take a third argument.
