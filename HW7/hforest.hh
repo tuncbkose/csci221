@@ -11,8 +11,7 @@
 class HForest {
     public:
         using tree_ptr_t = HTree::tree_ptr_t;
-        using pair_t = std::pair<uint64_t, tree_ptr_t>;
-        using forest_t = std::vector<pair_t>;
+        using forest_t = std::vector<tree_ptr_t>;
 
         // Constructor
         HForest();
@@ -32,6 +31,4 @@ class HForest {
     private:
         int sz_;
         forest_t forest_;
-        pair_t make_pair(tree_ptr_t t);
-        bool cmp(pair_t p1, pair_t p2);
 };

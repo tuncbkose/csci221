@@ -10,6 +10,11 @@
 #include <algorithm>
 #include <cassert>
 
+static bool cmp(HForest::tree_ptr_t p1, HForest::tree_ptr_t p2){
+    return p1->get_value() < p2->get_value();
+}
+
+
 // Constructor
 HForest::HForest(){
     sz_ = 0;
@@ -22,26 +27,18 @@ int HForest::size() const {
     return sz_;
 }
 
-HForest::pair_t HForest::make_pair(tree_ptr_t t){
-    return {t->get_value(), t};
-}
-
-bool HForest::cmp(pair_t p1, pair_t p2){
-    return p1.first < p2.first;
-}
-
 void HForest::add_tree(tree_ptr_t t){
-    forest_.push_back(make_pair(t));
+    forest_.push_back(t);
     ++sz_;
-    std::push_heap(forest_.begin(), forest_.end()); // For some reason, when I added the third argument "cmp(forest_.front(), forest_.back())" here, it didn't compile
+    std::push_heap(forest_.begin(), forest_.end(), cmp);
 }
 
 HForest::tree_ptr_t HForest::pop_tree() {
 
     assert(sz_>0);
 
-    tree_ptr_t rp = forest_.front().second; // Extract pointer from pair
-    std::pop_heap(forest_.begin(), forest_.end()); // same problem as push_heap function in add_tree
+    tree_ptr_t rp = forest_.front();
+    std::pop_heap(forest_.begin(), forest_.end(), cmp);
     --sz_;
     return rp;
 }
