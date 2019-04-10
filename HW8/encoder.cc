@@ -32,23 +32,25 @@ int main(int argc, char* argv[]){
             char c;
             std::ofstream output;
             output.open(std::string(argv[i]) + ".comp", std::ios::binary);
-            BitIO bitio(&output, nullptr);
-            while(input.get(c)){
+            { // Scope to ensure BitIO is destructed before ostream destruction
+                BitIO bitio(&output, nullptr);
+                while(input.get(c)){
+                    /* for debugging
+                    std::cout << "Encoding " << c << ".\n";
+                    */
+                    Huffman::bits_t bits = encoder.encode(c);
+                    for (auto bit : bits){
+                        bitio.output_bit(bit);
+                    }
+                }
+                // Encode EOF after all the characters.
+                Huffman::bits_t bits = encoder.encode(Huffman::HEOF);
                 /* for debugging
-                std::cout << "Encoding " << c << ".\n";
+                std::cout << "Encoding EOF.\n";
                 */
-                Huffman::bits_t bits = encoder.encode(c);
                 for (auto bit : bits){
                     bitio.output_bit(bit);
                 }
-            }
-            // Encode EOF after all the characters.
-            Huffman::bits_t bits = encoder.encode(Huffman::HEOF);
-            /* for debugging
-            std::cout << "Encoding EOF.\n";
-            */
-            for (auto bit : bits){
-                bitio.output_bit(bit);
             }
         }
     }
