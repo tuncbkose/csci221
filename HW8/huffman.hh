@@ -9,7 +9,7 @@
 #include <vector>
 
 #include "htree.hh"
-#include "hforest.hh" // NECESSARY? Added later for create_huffman_tree function.
+#include "hforest.hh"
 
 class Huffman {
  public:
@@ -38,7 +38,7 @@ class Huffman {
   
  private:
   
-  std::vector<int> freqtable_; // not sure about <int> part
+  std::vector<int> freqtable_;
   void update_frequency_table(char c);
   HTree::tree_ptr_t decode_current_node;
 };

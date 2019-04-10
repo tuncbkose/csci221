@@ -5,6 +5,7 @@
 
 #include "htree.hh"
 #include <cassert>
+#include <iostream>
 
 HTree::HTree(int a /*key*/,
             uint64_t b /*value*/,
@@ -16,24 +17,28 @@ HTree::HTree(int a /*key*/,
     right_ = d;
 }
 
-HTree::HTree(){             // default constructor
+// default constructor
+HTree::HTree(){
     key_ = 0;
     value_ = 0;
     left_ = nullptr;
     right_ = nullptr;
 }
 
-HTree::~HTree() = default;            // Delete
+// Destructor
+HTree::~HTree() = default;            
 
-
-int HTree::get_key() const{    // Return key in current node
+// Returns key of current node
+int HTree::get_key() const{
     return key_;
 }
-uint64_t HTree::get_value() const{ // Return value in current node
+
+// Returns value of current node
+uint64_t HTree::get_value() const{
     return value_;
 }      
 
-// Return the child of this node indicated by dir.
+// Returns the child of this node indicated by dir.
 // If the child is nullptr (current node is a leaf), returns nullptr.
 HTree::tree_ptr_t HTree::get_child(Direction dir) const{
     if (dir == Direction::LEFT){
@@ -44,7 +49,9 @@ HTree::tree_ptr_t HTree::get_child(Direction dir) const{
     }
 }
 
-bool HTree::find_key(int key) const{ // Call only if the current tree doesn't have the key
+// Helper function to path_to
+// Returns a boolean indicating if a given key is somewhere in the tree
+bool HTree::find_key(int key) const{
     
     return (key_ == key
         || (left_  && (*left_).find_key(key))
@@ -54,7 +61,7 @@ bool HTree::find_key(int key) const{ // Call only if the current tree doesn't ha
 
 // Return a list of directions from root to a node of a given key.
 // Crashes (with an assert) if key not contained in this tree
-HTree::path_t HTree::path_to(int key) const{ // I might be able to do this simpler if I'm allowed to add to HTree::Directions
+HTree::path_t HTree::path_to(int key) const{
 
     assert((*this).find_key(key));
 

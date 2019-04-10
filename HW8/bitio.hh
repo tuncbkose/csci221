@@ -27,7 +27,7 @@ class BitIO {
   bool input_bit();
  
  private:
-  char buffer_;
+  char buffer_; // contains the byte to be written/read
   int bit_index; // next empty value
   std::ostream* os_;
   std::istream* is_;

@@ -26,13 +26,11 @@ BitIO::BitIO(std::ostream* os, std::istream* is){
 // Flushes out any remaining output bits and trailing zeros, if any:
 BitIO::~BitIO(){
 
-    if(is_){
-    }
-
-
     if(os_){
-        while(0<bit_index && bit_index<CHAR_BIT){
-            output_bit(0);
+        if(0<bit_index){
+            // The output_bit function guarantees that buffer_ will have 0s
+            // in bits not yet written.
+            (*os_).put(buffer_);
         }
     }
 }
@@ -76,15 +74,15 @@ bool BitIO::input_bit(){
     // Assert that object is for reading
     assert(os_ == nullptr);
 
-    // bit_index when function is called only be 0 in the first call
+    // bit_index when function is called will be 0 only in the first call
     if(bit_index == CHAR_BIT || bit_index == 0){
         bit_index = 0;
         (*is_).get(buffer_);
         /* for debugging
         std::string binary = std::bitset<CHAR_BIT>(buffer_).to_string();
         std::cout<<"buffer_: " << binary << " , obtained from is\n";
-        */ 
+         */
     }
-
+    // post-increment index and return the bit
     return (buffer_>>bit_index++) & 1;
 }
