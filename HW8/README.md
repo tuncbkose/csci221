@@ -2,6 +2,7 @@
 This homework was done by me (Tunc Kose) alone.
 
 ### Description
+___
 * **HTree** and **HForest** classes were taken from my submissions for Homework 6 and 7, with small modifications for bug fixes, and for pop_tree function in HForest to return the tree with the smallest value.
 * **BitIO** class contains functions to read or write bits to streams.
     * BitIO constructs an object with a pointer to either an input or an output stream, with the other being nullptr.
@@ -18,6 +19,7 @@ This homework was done by me (Tunc Kose) alone.
     * Decoder reads the next bit with _BitIO::input_bit_ and calls _Huffman::decode_ repeatedly until it reaches an ASCII character. If the character is end-of-file, it stops, else it writes the character to a new file, named "compressed file".plaintext.
 
 ### Compression Tests
+___
 |   File name   | Raw size (bytes) | Compressed size (bytes) | Decompression matches raw file? |
 |:-------------:|:----------------:|:-----------------------:|:-------------------------------:|
 |    Makefile   |        848       |           790           |               yes               |
