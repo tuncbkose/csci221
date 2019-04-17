@@ -26,7 +26,7 @@ int main(int argc, char* argv[]){
             return 3;
         }
         else{
-            Cities city; // is it okay to override this
+            Cities city;
             unsigned int shortest;
             // Input contents of file into a Cities object
             file>>city;
@@ -42,6 +42,8 @@ int main(int argc, char* argv[]){
                     std::cout<<i<<"     "<<shortest<<"\n";
                 }
             }
+
+            // Output the shortest ordering into shortest.tsv
             std::ofstream output;
             output.open("shortest.tsv");
             output << city;
